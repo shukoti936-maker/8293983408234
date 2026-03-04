@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的极简穿梭机</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+            text-align: center;
+            width: 80%;
+            max-width: 500px;
+        }
+
+        input {
+            width: 80%;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            outline: none;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 10px;
+            background-color: #ff7e5f;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            background-color: #feb47b;
+        }
+
+        .hint {
+            margin-top: 15px;
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>🌐 网页穿梭机</h2>
+    <input type="text" id="urlInput" placeholder="输入网址 (例如: www.baidu.com)">
+    <br>
+    <button onclick="openWeb()">立即前往</button>
+    <p class="hint">提示：记得带上网址，或者直接输入关键词</p>
+</div>
+
+<script>
+    function openWeb() {
+        let url = document.getElementById('urlInput').value.trim();
+        if (!url) {
+            alert('请输入点什么再起飞！');
+            return;
+        }
+        
+        // 简单的协议补全逻辑
+        if (!url.startsWith('http://') && !url.startsWith('https://')) {
+            url = 'https://' + url;
+        }
+        
+        window.open(url, '_blank');
+    }
+
+    // 支持回车键触发
+    document.getElementById('urlInput').addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') {
+            openWeb();
+        }
+    });
+</script>
+
+</body>
+</html>
